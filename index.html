@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>3Sixty Project</title>
+		<!--projectdescription--><meta name="description" content="New 3Sixty Virtual Tour Project"><!--projectdescription-end-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
+		
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<!-- Insert this line above script imports  -->
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		
+		<script src="imagedata.js"></script>
+		<script src="jquery.js"></script>
+		<script src="three.min.js"></script>
+		<script src="panolens.min.js"></script>
+		
+		<!-- Insert this line after script imports -->
+		<script>if (window.module) module = window.module;</script>
+		
+		<style>
+		
+			
+						
+			/* SCROLLBAR STYLING */
+			/* width */
+			::-webkit-scrollbar {
+				width: 6px;
+				height: 6px;
+			}
+			/* Track */
+			::-webkit-scrollbar-track {
+				background: inherit; 
+			}
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: #eba576; 
+				transition: background .5s;
+			}
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: #ff6600; 
+			}
+
+
+			html, body {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #000;
+				color; black;
+			}
+
+			a:link, a:visited{
+				color: #bdc3c7;	
+			}
+
+			.fullwrapper{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: black;
+			}
+			
+			#container {
+                width: 100%;
+                height: 100%;
+            }
+			
+			#tmp{
+				position: fixed;
+				top: 0;
+				left: 0; 
+				right: 0;
+				bottom: 0;
+				padding: 100px;
+				background-color: rgba(0,0,0,.5);
+				backdrop-filter: blur(5px);
+				display: none;
+			}
+		</style>
+	</head>
+	<body id="body">
+	    <div id="container" style="color: black;"></div>
+    	<div id="loading" class="fullwrapper" style="display: table; width: 100%; height: 100%;">
+    		<div style="display: table-cell; vertical-align: middle; text-align: center; color: white; font-size: 30px; padding: 50px;">
+    			<!--loadingtext-->DEVNA TN ...<!--loadingtext-end-->
+    		</div>
+    	</div>
+		
+		<div id="tmp">
+			<div style="width: 100%; height: 100%; overflow: auto; box-sizing: border-box; position: relative;" id="tmpcontent"></div>
+			<div style="position: absolute; top: 0; right: 0; padding: 10px; color: red; font-size: 20px; z-index: 10;" onclick="hideTemp()"><i class="fa fa-times"></i></div>
+		</div>
+    	<script>
+			
+            var container = document.querySelector( '#container' );
+			/*panolens*/
+var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  output: 'console' , autoHideInfospot: false, } );
+/*panolens-end*/
+			
+			viewer.addUpdateCallback(function(){});
+			
+			/*panoramas*/
+var StreetView3gold = new PANOLENS.ImagePanorama( "panoramas/StreetView3gold.jpg" );
+						StreetView3gold.addEventListener('progress', function(e){
+							$("#loading").show();
+						});
+						StreetView3gold.addEventListener('load', function(e){
+							$("#loading").fadeOut();
+						});
+						StreetView3gold.addEventListener('click', function(e){
+						});
+
+var infospotStreetView3gold0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+							infospotStreetView3gold0.position.set( 1369.61, -3593.31, 3189.28 );
+							StreetView3gold.add(infospotStreetView3gold0);
+infospotStreetView3gold0.addEventListener('click', function(){
+showMedia(4, 'pdf/seaofpopies.pdf');
+});
+var infospotStreetView3gold1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+							infospotStreetView3gold1.position.set( 1422.89, -2345.38, 4174.07 );
+							StreetView3gold.add(infospotStreetView3gold1);
+infospotStreetView3gold1.addEventListener('click', function(){
+showMedia(4, 'pdf/The-Necronomicon-Spellbook.pdf');
+});
+var infospotStreetView3gold2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+							infospotStreetView3gold2.position.set( 4175.74, -2741.63, -22.35 );
+							StreetView3gold.add(infospotStreetView3gold2);
+infospotStreetView3gold2.addEventListener('click', function(){
+showMedia(4, 'pdf/FlaskFrameworkCookbook.pdf');
+});
+var infospotStreetView3gold3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+							infospotStreetView3gold3.position.set( 4968.90, -465.38, 134.32 );
+							StreetView3gold.add(infospotStreetView3gold3);
+infospotStreetView3gold3.addEventListener('click', function(){
+showMedia(4, 'pdf/The_Art_Of_War.pdf');
+});
+var infospotStreetView3gold4 = new PANOLENS.Infospot( 512, hotspotIcons[11].data, true );
+							infospotStreetView3gold4.position.set( -1264.22, -902.68, -4742.12 );
+							StreetView3gold.add(infospotStreetView3gold4);
+infospotStreetView3gold4.addEventListener('click', function(){
+showMedia(3, 'audios/and-a-happy-new-year-sms-513.mp3');
+});
+viewer.add( StreetView3gold );
+$(document).ready(function(){ viewer.setPanorama( StreetView3gold ); });
+
+/*panoramas-end*/
+            
+			
+			function hideTemp(){
+				$("#tmp").fadeOut();
+				setTimeout(function(){
+					$("#tmpcontent").html("");
+				},1000);
+			}
+			
+			function showMedia(type, content){
+				switch(type){
+					case 1 :
+						//Image
+						$("#tmpcontent").html("<img src='"+content+"' style='width: 100%;'>");
+						$("#tmp").fadeIn();
+						break;
+					case 2 :
+						//Video
+						$("#tmpcontent").html("<video id='webvideo' controls autoplay style='width: 100%; height: 100%;'><source src='" +content+ "' type='video/mp4'> Your browser does not support the video tag. </video>");
+						$("#tmp").fadeIn();
+						break;
+					case 3 :
+						//Audio
+						$("#tmpcontent").html("<audio controls style='width: 100%;'><source src='"+content+"' type='audio/ogg'>Your browser does not support the audio tag.</audio>");
+						$("#tmp").fadeIn();
+						break;
+					case 4 :
+						//PDF
+						$("#tmpcontent").html("<iframe src='pdfjs/web/viewer.html?file=../../"+content+"' style='width: 100%; height: 100%;'></iframe>");
+						$("#tmp").fadeIn();
+						break;
+				}
+			}
+        </script>
+	</body>
+</html>
